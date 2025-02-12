@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Achi 💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
+
+        html, body {
+            height: 100%;
+            min-height: -webkit-fill-available; /* iOS fix */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: url('https://th.bing.com/th/id/OIP.WZRBH1fw5XfkurevPLer0wHaNK?rs=1&pid=ImgDetMain') no-repeat center center/cover;
+            font-family: 'Parisienne', cursive, sans-serif; /* Added fallback */
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            -webkit-tap-highlight-color: transparent; /* Improve touch response */
+        }
+
+        h1 {
+            color: white;
+            font-size: 2.8em;
+            animation: fadeIn 2s ease-in-out;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 15px;
+            border: 3px solid white;
+            box-shadow: 0px 0px 10px rgba(255, 182, 193, 0.8);
+        }
+
+        button {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .btn, .yes-btn, .no-btn {
+            padding: 15px 30px;
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+            border: 2px solid white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn {
+            background-color: #ff4d6d;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+        }
+
+        .yes-btn {
+            background: #ff66b2;
+            position: absolute;
+            animation: bounce 0.5s infinite;
+        }
+
+        .no-btn {
+            background: #6d0f4f;
+            margin: 5px;
+        }
+
+        .valentine-box {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 15px;
+            border: 3px solid white;
+            box-shadow: 0px 0px 15px rgba(255, 182, 193, 0.8);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hearts {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: url('https://64.media.tumblr.com/ca624efd4fe242040c301db920241683/74e130b56a20415f-b4/s1280x1920/211fc0bafcd39af827f7b0a1ca8451027982129c.jpg') no-repeat center center/contain;
+            animation: floatUp 5s infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Hello Babiii, I have a question for you... ❤️</h1>
+    <button class="btn" onclick="showMessage()">Click Me!</button>
+
+    <script>
+        function showMessage() {
+            document.body.innerHTML = `
+                <div id="valentine-container" class="valentine-box">
+                    <h1 style="font-size:3em; color:white;">My Achii, Will You Be My Valentine? 💖</h1>
+                    <img src="https://th.bing.com/th/id/OIP.am7Q5RUCQ-L9W51ETTwSDAAAAA?w=211&h=188&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Kuromi" width="200">
+                    <div id="buttons">
+                        <button class="yes-btn" onclick="answerYes()" style="position: static;">Yes!</button>
+                        <button class="no-btn" onclick="answerNo()">No?</button>
+                    </div>
+                </div>
+            `;
+
+            let heartCount = 0;
+            setInterval(() => {
+                if (heartCount < 10) { // Limit hearts for performance
+                    let heart = document.createElement("div");
+                    heart.className = "hearts";
+                    heart.style.left = Math.random() * 100 + "vw";
+                    heart.style.top = Math.random() * 100 + "vh";
+                    document.body.appendChild(heart);
+                    heartCount++;
+                    setTimeout(() => {
+                        heart.remove();
+                        heartCount--;
+                    }, 5000);
+                }
+            }, 1000);
+        }
+
+        function answerYes() {
+            document.body.innerHTML = `
+                <div class="valentine-box">
+                    <h1 style="color:white; text-align:center;">Thank You! Babii, you made me the happiest! ❤️</h1>
+                    <img src="https://media.tenor.com/3PFmYr6NEXsAAAAi/kuromi-thank-you.gif" alt="Happy Kuromi" width="200">
+                </div>
+            `;
+        }
+
+        function answerNo() {
+            let newYesBtn = document.createElement("button");
+            newYesBtn.innerText = "Yes!";
+            newYesBtn.className = "yes-btn";
+            newYesBtn.onclick = answerYes;
+
+            // Constrain button within viewport
+            let randomX = Math.random() * (window.innerWidth - 120);
+            let randomY = Math.random() * (window.innerHeight - 60);
+
+            newYesBtn.style.left = `${randomX}px`;
+            newYesBtn.style.top = `${randomY}px`;
+
+            document.body.appendChild(newYesBtn);
+        }
+    </script>
+
+</body>
+</html>
